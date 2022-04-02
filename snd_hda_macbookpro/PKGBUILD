@@ -1,0 +1,45 @@
+# Maintainer: Andy Holst <andy.holst85@gmail.com>
+pkgbase=snd_hda_macbookpro
+pkgname=(${pkgbase})
+pkgver=1
+pkgrel=1
+pkgdesc="Cirrus 8409 kernel driver for the MBP 2016+ soundcard."
+arch=('x86_64')
+url="https://github.com/davidjo/snd_hda_macbookpro"
+license=('GPL')
+groups=('')
+depends=()
+makedepends=('tar' 'wget' 'sed' 'git' 'make')
+checkdepends=()
+optdepends=()
+source=("git+https://github.com/davidjo/snd_hda_macbookpro#branch=master"
+        "build.cirrus.driver.sh"
+        "install.cirrus.driver.sh")
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+noextract=()
+md5sums=()
+validpgpkeys=()
+
+prepare() {
+        cp build.cirrus.driver.sh "$pkgname"/.
+        cp install.cirrus.driver.sh "$pkgname"/.
+}
+
+build() {
+	cd "$pkgname"
+       ./build.cirrus.driver.sh
+}
+
+package() {
+        cd "$pkgname"
+        ./install.cirrus.driver.sh
+}
+sha256sums=('SKIP'
+            'b7271a77bd263208d562e63dfdd0ab586273777620edabd021bc5509fadf30d3'
+            '8c806d14a167ed6c7ee01b36e70d6f2c4596b0165e067c0937318112653434f4')
